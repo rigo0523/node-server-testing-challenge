@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Node Server Testing Challenge",
   "scripts": {
-    "test": "cross-env DB_ENV=testing jest --watch --verbose --detectOpenHandles",
-    "server": "nodemon index.js",
+    "test": "cross-env NODE_ENV=testing jest --watch --verbose --detectOpenHandles",
+    "server": "cross-env NODE_ENV=development nodemon index.js",
     "start": "node index.js"
   },
   "jest": {
