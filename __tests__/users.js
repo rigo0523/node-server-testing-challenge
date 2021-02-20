@@ -5,7 +5,10 @@ const db = require("../database/dbConfig");
 //------------CREATE A TEST.DB3 FILE--------------------//
 // knex seed:run --env=testing
 // knex migrate:latest --env=testing
+// npm i @types/jest
 
+//make call to migrate api inside knex
+//make sure it's a clean DB
 beforeAll(async () => {
   await db.migrate.rollback();
   await db.migrate.latest();
@@ -30,7 +33,7 @@ afterAll(async () => {
   await db.destroy();
 });
 
-describe("users integrations test", () => {
+describe("GET / users integrations test", () => {
   it("GET list of users /api/users", async () => {
     const res = await supertest(server).get("/api/users");
 
@@ -58,11 +61,20 @@ describe("users integrations test", () => {
   it("creates a new user", async () => {
     const newUser = { name: "test", location: "testing" };
     const res = await supertest(server).post("/api/users").send(newUser);
-    console.log(res);
+    // console.log(res);
     expect(res.statusCode).toBe(201);
     expect(res.type).toBe("application/json");
     expect(res.body.name).toBe("test");
     // expect(res.body.id).toBeDefined(); //we don't know what it's going to be, just make sure
     //something gets generated
   });
+  // it("GET/", () => {
+  //   return supertest(server)
+  //     .get("/api/users")
+  //     .then((res) => {
+  //       console.log(res);
+  //       expect(res.statusCode).toBe(200);
+  //     });
+  // });
+  //PROMISE BASED TESTING---------------------
 });
